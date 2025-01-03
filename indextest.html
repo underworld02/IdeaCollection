@@ -1,0 +1,66 @@
+<!--
+ * @Author: underworld02 1069645184@qq.com
+ * @Date: 2024-11-16 17:12:25
+ * @LastEditors: underworld02 1069645184@qq.com
+ * @LastEditTime: 2024-12-18 19:22:31
+ * @FilePath: \wechat-master\indextest.html
+ * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
+-->
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    #box {
+      box-sizing: content-box;
+      width: 200px;
+      height: 200px;
+      padding: 20px;
+      margin: 20px;
+      border: 2px solid black;
+      overflow: scroll;
+    }
+    #content {
+      margin: 10px;
+      border: 1px solid black;
+      padding: 20px;
+      width: 400px;
+      height: 400px;
+    }
+  </style>
+  
+  <div id="box">
+    <div id="content"></div>
+  </div>
+  
+  <script>
+    document.addEventListener('DOMContentLoaded',function(){
+      var box = document.getElementById('box');
+      console.log('offsetWidth:', box.offsetWidth); // 244 (200 + 20 + 20 + 2 + 2)
+      console.log('offsetHeight:', box.offsetHeight); // 244 (200 + 20 + 20 + 2 + 2)
+    
+      console.log('clientWidth:', box.clientWidth); // 240 (200 + 20 + 20 -7)
+      console.log('clientHeight:', box.clientHeight); // 240 (200 + 20 + 20 -7)
+    
+      console.log('scrollWidth:', box.scrollWidth); // 440 (content+padding的宽度)
+      console.log('scrollHeight:', box.scrollHeight); // 440 (content+padding的高度)
+
+      console.log('=================================');
+
+      console.log('');
+
+    });
+    document.addEventListener('click',function(e){
+      var box = document.getElementById('box');
+      let client = box.getBoundingClientRect();  
+      console.log(client.clientX);//undef
+      console.log(client.x);
+      console.log(client.left);
+      console.log(client.width);
+
+    });
+    
+  </script>
+   
+</body>
+</html>
+ 

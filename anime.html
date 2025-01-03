@@ -1,0 +1,91 @@
+<!--
+ * @Author: underworld02 1069645184@qq.com
+ * @Date: 2024-12-19 14:30:27
+ * @LastEditors: underworld02 1069645184@qq.com
+ * @LastEditTime: 2024-12-19 15:05:24
+ * @FilePath: \wechat-master\anime.html
+ * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
+-->
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    #box1,#box2,#box3 {
+      box-sizing: content-box;
+      position: absolute;
+      width: 50px;
+      height: 40px;
+      padding: 20px;
+      margin: 20px;
+      background-color: blue;
+      border: 2px solid black;
+      overflow: hidden;
+    }
+    #box1 {
+        animation: boxAnime 2s ease 2s infinite;
+
+    }
+    @keyframes boxAnime {
+        0% {left: 10px;}
+        25% {left: 200px;}
+        50% {left: 400px;}
+        75% {left: 200px;}
+        100% {left: 10px;}
+    }
+
+    #box2 {
+        top: 100px;
+        background-color: green;
+    }
+    #box3 {
+        top: 200px;
+        background-color: red;
+    }
+  </style>
+  
+  <div id="box1"></div>
+  <div id="box2"></div>
+  <div id="box3"></div>
+  <script>
+    //兼容性处理
+    window.requestAnimFrame = (function(){
+        return window.requestAnimationFrame       ||
+            window.webkitRequestAnimationFrame ||
+            window.mozRequestAnimationFrame    ||
+            function(callback){
+                    window.setTimeout(callback, 1000 / 60);
+            };
+    })();
+
+    document.addEventListener('DOMContentLoaded',function(){
+
+        ///box2
+        let box2 = document.getElementById("box2");
+        let maxLeft = 300;
+        let minLeft = 10;
+        let curLeft = box2.getBoundingClientRect().x;
+        let fn = function(){
+            curLeft = (curLeft+1-minLeft)%(maxLeft-minLeft)+minLeft;
+            box2.style.left = curLeft+'px';
+        }
+        setInterval(()=>{fn()},1000 / 60);
+
+        ///box3
+        let box3 = document.getElementById("box3");
+        var flag = true;
+        var left = 0;
+        function render(){
+            left == 0 ? flag = true : left == 400 ? flag = false : '';
+            flag ? box3.style.left = `${left++}px` : box3.style.left = ` ${left--}px`;
+        }
+        let loop = function(){
+            render();
+            requestAnimationFrame(loop);
+        }
+        loop();
+
+    });
+  </script>
+   
+</body>
+</html>

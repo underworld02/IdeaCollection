@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    #draggable {
+      box-sizing: content-box;
+      position: absolute;
+      width: 50px;
+      height: 40px;
+      padding: 20px;
+      margin: 20px;
+      background-color: blue;
+      border: 2px solid black;
+      overflow: hidden;
+    }
+    #content {
+      margin: 10px;
+      border: 1px solid black;
+      padding: 20px;
+      width: 400px;
+      height: 400px;
+    }
+  </style>
+  
+  <div id="draggable"></div>
+  
+  <script>
+    document.addEventListener('DOMContentLoaded',function(){
+        let dragbox = document.getElementById("draggable");
+        let offset = { x: 0, y: 0 };
+        let isDragging = false;
+        dragbox.addEventListener('mousedown',function(e){
+            offset.x = e.clientX  - dragbox.offsetLeft;
+            offset.y = e.clientY - dragbox.offsetTop;
+            isDragging = true;
+        });
+        dragbox.addEventListener('mousemove',function(e){
+            if(isDragging){
+                let  left = e.clientX - offset.x;
+                let  top = e.clientY - offset.y;
+                //offset = { x: dragbox.of, y: e.clientY };
+                dragbox.style.left = left + 'px';
+                dragbox.style.top = top + 'px';
+            }
+        })
+        dragbox.addEventListener('mouseup',function(){
+            isDragging = false;
+        })
+
+    });
+  </script>
+   
+</body>
+</html>
