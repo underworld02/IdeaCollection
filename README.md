@@ -1,190 +1,168 @@
-# Co-messager
+## 博客介绍
 
-> 本项目不再维护，如在阅读**文档**、观看**视频**后任有问题可以加群或者本人 `QQ` 和微信。
+<p align="center">
+  <a href="https://www.kuailemao.xyz">
+    <img src="https://foruda.gitee.com/avatar/1667975309022664009/11937114_kuailemao_1667975308.png" alt="Ruyu的个人博客" style="border-radius: 50%;">
+  </a>
+</p>
 
-## 相关工具版本
+<p align="center">
+  基于 SpringBoot3 + Vue3 开发前后端分离个人博客系统
+</p>
 
-1. node: 12.14.0
-2. npm: 6.4.1
-3. MongoDB: 5.0.3
+## 项目部分截图
 
-## 相关地址
+### 前台
 
-- [掘金-文章](https://juejin.im/post/5e8dd45cf265da47e34bf94d)
-- [功能介绍-视频](https://www.bilibili.com/video/BV1aX4y1K7EF?p=1)
-- [项目运行-视频](https://www.bilibili.com/video/BV1aX4y1K7EF?p=2)
+![前台首页](https://gitee.com/kuailemao/ruyu-blog/raw/master/img/%E5%89%8D%E5%8F%B0%E9%A6%96%E9%A1%B5.jpg)
 
-## 功能
-- [x] 登陆注册
-- [x] 单聊
-- [x] 群聊
-- [x] 历史消息
-- [x] 图片发送
-- [ ] 文件发送
-- [ ] 代码片段发送
-- [x] 表情发送
-- [x] 白板协作
-- [x] 音视频聊天
-- [x] 消息已读提醒
-- [x] 好友分组
-- [x] 好友备注
-- [x] 好友上线提醒
-- [x] 在线用户头像高亮
-- [x] 添加好友
-- [x] 添加群聊
-- [x] 朋友圈功能
-- [x] 发表朋友圈
-- [x] 好友朋友圈
-- [x] 朋友圈动态点赞
-- [x] 朋友圈动态评论
-- [x] 朋友圈动态回复评论
-- [x] 日程设置
+![前台中心](https://gitee.com/kuailemao/ruyu-blog/raw/master/img/%E5%89%8D%E5%8F%B0%E4%B8%AD%E5%BF%83.jpg)
 
-## 启动项目
+![前台文章](https://gitee.com/kuailemao/ruyu-blog/raw/master/img/%E5%89%8D%E5%8F%B0%E6%96%87%E7%AB%A0.jpg)
 
-### 1、克隆项目
+### 后台
 
-```bash
-git clone git@github.com:CCZX/wechat.git
-```
+![后台发布文章](https://gitee.com/kuailemao/ruyu-blog/raw/master/img/%E5%90%8E%E5%8F%B0%E5%8F%91%E5%B8%83%E6%96%87%E7%AB%A0.jpg)
 
-或者下载压缩包解压也可以。
+![后台文章列表](https://gitee.com/kuailemao/ruyu-blog/raw/master/img/%E5%90%8E%E5%8F%B0%E6%96%87%E7%AB%A0%E5%88%97%E8%A1%A8.jpg)
 
-### 2、删除相关代码
+## 在线体验地址
+**注意：在线预览地址可能与仓库代码不同步，以仓库为主**
+> 服务器比较垃圾，随机可能崩掉，发现了会进行维护，且看且珍惜
 
-> 这部分代码是在我的数据库里，所以你需要删除或者替换相关代码以防报错
+**前台博客：** kuailemao.xyz
 
-![removed code](./document/clean.png)
+**后台管理：** blog.kuailemao.xyz
 
-**需要注意的是这一步需要在启动服务端之前执行。不然会出现不可预料的错误**
+**测试账号：** Test，**密码：** 123456
 
-### 2、启动MongoDB数据库
+**ps:** 测试账号功能不代表系统所有功能，有些权限过高模块不方便在线展示
 
-```bash
-mongo
-```
+**Gitee地址：** https://gitee.com/kuailemao/ruyu-blog
 
-如果还没有安装MongoDB可以参考下面文章：
-- [mongoDB - 菜鸟教程](https://www.runoob.com/mongodb/mongodb-tutorial.html)
-- [mongoDB的安装和启动](https://juejin.cn/post/6844903958826188808)
+**Github地址：** https://github.com/kuailemao/Ruyu-Blog
 
-### 3、启动服务器
+**B站视频介绍：** https://www.bilibili.com/video/BV181hNeiEDb/?vd_source=ff1e09f5473622b91dc0efc92418b537#reply112716668797561
 
-```bash
-cd chatServer
-npm install
-# 初始化数据库，初始化成功后可以看到自动创建了chat数据库
-node init.js
-node app.js
-```
+**接口文档：** [API文档 (kuailemao.xyz)](http://kuailemao.xyz:8088/doc.html#/home)
 
-### 4、启动客户端
-```bash
-cd chatClient
-npm install
-npm run dev
-```
+**欢迎各位提交 PR ，一起改进项目**
 
-启动成功后访问[127.0.0.1:8080](127.0.0.1:8080)即可访问。
+## 运行环境
 
-### 5、启动管理员端（3000端口）
-```bash
-cd chatAdmin
-npm install
-npm start
-```
+### 后端：
 
-启动成功后访问[127.0.0.1:3000](127.0.0.1:3000)即可访问。
+|   名称   | 环境  |
+| :------: | :---: |
+|  MySQL   |  8.0  |
+|  Redis   | 7.2.3 |
+| RabbitMQ | 最新  |
+|  minio   | 最新  |
+|   JDK    |  17   |
 
-### 6、Q&A
+**前端：**
 
-按照上述步骤启动一般是不会出问题，有问题请首先排查是否**执行顺序**不一致，以及数据库是否启动。
+| 名称 |  环境   |
+| :--: | :-----: |
+| pnpm | 8.12.0  |
+| node | 16.17.0 |
 
+## 项目部署
+**部署文档地址：** https://kuailemao.xyz/article/48
 
-## 项目截图
+## 项目特点
 
-**github上如果没有科学上网容易裂图，推荐在掘金上看：** 
+* 前端参考了众多优秀博客大佬设计，页面美观，响应式布局
+* 后台管理基于 Antdv Pro 后台通用框架二次开发
+* 前后端分离，Docker Compose 一键部署
+* 采用 RABC 权限模型，使用 SpringSecurity 进行权限管理
+* 支持动态权限修改、动态菜单和路由
+* 文章、分类、标签、时间轴、树洞、留言板、聊天、友链等模块
+* 站长介绍、公告、电子时钟、随机文章、每日鸡汤、网站资讯
+* 支持代码高亮、图片预览、黑夜模式、点赞、收藏、评论等功能
+* 评论支持在线预览、Markdown、表情包
+* 发送友链申请、通过等自动发送邮件提醒
+* 接入第三方 gitee、github登录，减少注册成本
+* 文章编辑使用 Markdown 编辑器
+* 实现日志管理（操作、登录），服务监控、用户、菜单、角色、权限管理
+* 使用 自己搭建 minio 进行图片存储（避免了使用第三方对象存储被刷流量问题）
+* 使用 拦截器 + Redis 对接口进行了限流处理（每分钟）,后端使用 JSR 303 对参数校验，使用 Spring Aop + RabbitMQ 对后台操作日志处理
+* 采用 Restful 风格的 API，注释完善，后端代码使用了大量 stream 流编程方式，代码非常美观
+* ……
 
-地址：https://juejin.im/post/5e8dd45cf265da47e34bf94d
+## 技术介绍
 
-### PC端
+**前台前端（博客）：** Vue3 + Pinia +  Vue Router + TypeScript + Axios + Element Plus + Echarts……
 
-#### 1、主页
-![主页](./document/screenshots/p-home.png)
+**后台启动（管理）：** Vue3 + Pinia +  Vue Router + TypeScript + Axios + Antdv Pro + Ant Design Vue……
 
-#### 2、聊天
-![聊天](./document/screenshots/p-chat1.png)
-![已读设置](./document/screenshots/p-chat2.png)
-![通知](./document/screenshots/p-notify.png)
+**后端：** JDK17 + SpringBoot3 + SpringSecurity + Mysql + Redis + Quartz  + RabbitMQ + Minio + Mybatis-Plus + Nginx + Docker……
 
-#### 3、朋友圈
-![朋友圈](./document/screenshots/p-pyq1.png)
-![朋友圈评论](./document/screenshots/p-pyq2.png)
+**其他：** Gitee、Github 第三方登录
 
-#### 4、主题设置
-![主题](./document/screenshots/p-theme.png)
+## 运行环境
 
-#### 5、日程
-![日程](./document/screenshots/p-schedule1.png)
-![新建日程](./document/screenshots/p-schedule2.png)
+### 推荐
 
-#### 6、个人中心
-![设置](./document/screenshots/p-personcenter.png)
+> 最低 2 核 4 G
 
-### 移动端
+**我的：** 腾讯云 2 核 2 G  4 M * 2  （穷）
 
-#### 1、登录
-![移动端](./document/screenshots/m-login.png)
+**系统：** **OpenCloudOS**
 
-#### 2、聊天列表
-![移动端](./document/screenshots/m-aside.png)
-![移动端](./document/screenshots/m-conversationlist.png)
+**前端：** Docker   **后端：** jenkins
 
-#### 3、聊天界面
-![移动端](./document/screenshots/m-chat.png)
+## 后续计划（有空）
 
-#### 4、图片预览
-![移动端](./document/screenshots/m-picpreview.png)
+> 白天上班，只能抽空优化项目，还望理解
 
-#### 5、换肤
-![移动端](./document/screenshots/m-theme.png)
+- [x] 持续优化前台响应式
+- [x] 新增用户设置、支持修改邮箱、头像、昵称...
+- [x] 重构移动端首页
+- [x] 重构移动端文章页面
+- [x] 重构各种功能邮箱提醒(v1.4.1)
+- [ ] 实现后台导入导出
+- [ ] 实现前台搜索
+- [x] 前台添加更加有趣的效果
+- [x] 前台音乐播放器
+- [ ] 后台图片资源管理模块
+- [x] 找出并修复一些隐藏的bug(持续完善)
+- [x] 前端响应速度优化到网络正常的情况下5秒以内
+- [x] 实现黑名单管理机制
+- [ ] 后台首页数据大屏
+- [ ] 后台图片资源管理
+- [ ] 博客app版本
+- [ ] 博客小程序版本
 
-#### 6、朋友圈
-![移动端](./document/screenshots/m-pyq.png)
+## 项目总结
 
-## 系统功能图
+整个项目花费了大量的时间与精力（尤其是前台前端），作者独自手写了三个月左右，除了后台的页面使用了一个后台框架模板外，其他的全部一点一点手写（包括后台的全部模块），这也是我第一次正式的开源一个项目（莫名成就感），虽然但是这个项目我并不觉得很完美，一部分是因为我自己技术有限的原因（主后端的全栈选手），一部分是项目还没经过时间的拷打，开发过程中也参考了很多优秀的项目，在这里感谢大家的开源项目，希望我的项目也能给你带来收获。
 
-### 普通用户
-![普通用户功能设计0404](./document/普通用户功能设计0404.png)
+### 鸣谢项目：
 
-### 管理员
-![普通用户功能设计0404](./document/系统管理员功能设计0404.png)
+* [mrzym-blog](https://gitee.com/mrzym/stable-version-of-blog)
 
-## 技术路线
+* [掐指yi算’逢考必过-Blog](https://gitee.com/wu_shengdong/blog)
 
-> 本系统分为`Client`，`Server`，`Admin`三个端：其中`Client`为客户端，`Server`为服务器端，`Admin`为管理员端。使用前后端分离的开发模式
+* [hexo-theme-butterfly](https://github.com/jerryc127/hexo-theme-butterfly)
 
-- 客户端使用`Vue`、`VueX`、`Vue-Router`；
-- 管理员端使用`React`、`antd`；
-- 后端使用的是`node.js`；
-- 数据库使用的是`MongoDB`；
-- 在实现聊天的全双工数据通信使用的是`WebSocket`、`socket.io`。
+* [Antdv Pro](https://docs.antdv-pro.com/)
 
-## 项目打包
+* [md-editor-v3](https://imzbf.github.io/md-editor-v3/zh-CN/index)
 
-1. 客户端的代码打包后资源默认放在`chatServer`文件夹的`public`目录下；
-2. 管理员端在`chatAdmin`的`build`目录下，需要自己自己手动将整个build目录复制到`chatServer`文件夹的`public`目录下，然后修改`build`目录文件的`index.html`中引入资源路径前都加上`/build`。
+* [vue-danmaku](https://github.com/hellodigua/vue-danmaku)
 
-## 交流
+* ……
 
-- qq群
+## 最后
 
-![qq](./document/resources/qqgroup.jpg)
+**该文档初次编写可能存在一些问题，如果发现，后面会进行修改提交**
 
-- `E-mail`：`ccdebuging@gmail.com`、`cAuth1218@163.com`
-- `QQ`：`1831058205`
-- 微信：`cAutg9248`
+**该项目交流群：** （有什么不懂的可以提问）
 
-## 参考项目
+**QQ：** 635887836
 
-- https://github.com/wuyawei
+**二维码：**
+
+<img src="https://gitee.com/kuailemao/ruyu-blog/raw/master/img/Ruyu开源博客交流群群聊二维码.png" />
+
