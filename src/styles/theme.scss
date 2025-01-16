@@ -1,0 +1,90 @@
+// 亮色模式下的主题色
+:root {
+  --mao-background-color: aliceblue;
+  // 留言板说明背景
+  --mao-bg-message: #f5f5f5;
+  // 分类列表背景
+  --mao-bg-category: linear-gradient(135deg, #f54ea2, #ff7676);
+  // 首页波浪
+  --mao-bg-wave01: rgba(240, 248, 255,0.7);
+  --mao-bg-wave02: rgba(240, 248, 255,0.5);
+  --mao-bg-wave03: rgba(240, 248, 255,0.3);
+  --mao-bg-wave04: rgba(240, 248, 255,1);
+  // footer
+  --mao-bg-footer: linear-gradient(135deg,#f6ceec,#d939cd);
+  // 评论框背景
+  --mao-bg-comment: #F2F2F3;
+  // 回复用户名
+  --mao-bg-reply: rgba(245, 108, 108, 0.7);
+  // 文章页面右下角滚动进度背景色
+  --mao-scroll-percentage-bg: #ffffff;
+  // 文章页面底部滚动进度条背景色
+  --mao-scroll-percentage-bar: linear-gradient(135deg,#17ead9,#6078ea);
+  // 设置模块背景阴影
+  --mao-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
+
+  // 音乐播放器变量
+  --primary: #5cbfef;
+  --router-color: #dddddd;
+  --font-color: #676767;
+  --dark-font-color: #a7a7a7;
+  --second-font-color: #b3b7ff;
+  --hot-color: #f00;
+  --md-active: #409eff;
+  --global-white: #fff;
+  --global-black: #000;
+  --global-shadow-white: #fafafa;
+  --header-bg-color: #8a7e90;
+  --meta-color: #858585;
+  --comment-grey: #a4a4a4;
+  --border-color: #7ec4f2;
+  --hr-border: #a9d5f4;
+  --top: #f26c60;
+  --error: #f56c6c;
+  --music-main-active: #62c28a;
+  --music-main-bg: #101827;
+  --shadow-mask-bg: rgba(0, 0, 0, 0.5);
+  --shadow-button-bg: rgba(255, 255, 255, 0.5);
+  --global-font-size: 14px;
+  --card-box-shadow: 0 3px 6px 3px rgba(7, 17, 27, 0.06);
+  --card-hover-box-shadow: 0 3px 6px 3px rgba(7, 17, 27, 0.15);
+  // 亮色滚动条
+  --scroll-bar-color: linear-gradient(135deg,#17ead9,#6078ea);
+  // 充电榜列表亮色背景
+  --mao-charging-bg-color: #f5f5f5;
+}
+
+// 暗色模式下的主题色
+html.dark {
+  --mao-background-color: #424242;
+  --mao-bg-message: #212121;
+  --mao-bg-category: linear-gradient(135deg,#000c40,#607d8b);
+  --mao-bg-wave01: rgba(70, 70, 70, 0.7);
+  --mao-bg-wave02: rgba(70, 70, 70, 0.5);
+  --mao-bg-wave03: rgba(70, 70, 70, 0.3);
+  --mao-bg-wave04: rgba(70, 70, 70, 1);
+  --mao-bg-footer: linear-gradient(135deg,#000c40,#607d8b);
+  --mao-bg-right: #292D3DFF;
+  --mao-bg-left: #52305e;
+  --mao-bg-left-card: #714e79;
+  --mao-bg-comment: #a8a8b7;
+  --mao-bg-reply: rgba(0, 0, 0, 0.7);
+  --mao-scroll-percentage-bg: #18222c;
+  --mao-scroll-percentage-bar: linear-gradient(135deg,#5b247a,#1bcedf);
+
+  // 音乐播放器变量
+  --global-white: #424242;
+  --global-shadow-white: #1D1D1D;
+  --mao-shadow: 0 2px 12px 0 rgba(255, 255, 255, 0.1);
+  // 暗色滚动条
+  --scroll-bar-color: linear-gradient(135deg,#43cbff,#9708cc);
+  // 充电榜列表暗色背景
+  --mao-charging-bg-color: #212121;
+}
+
+// 全局字体
+body {
+  /* 将 body 元素或者任何其他你想要应用该字体的元素设置为 '阿里妈妈方圆体 VF Regular' */
+  font-family: "阿里妈妈方圆体 VF Regular", sans-serif;
+  /* 当自定义字体尚未加载时提供一个备选字体（在这个例子中是无衬线字体） */
+}
