@@ -774,7 +774,21 @@ class Logger{
     Logger.instance = this;
   }
 }
-
+//========================14. 实现Ajax======================================
+class Ajax{
+  static get(url){
+    let xhr = new XMLHttpRequest();
+    xhr.open('get',url);
+    
+    xhr.onreadystatechange = (response)=>{
+      if(xhr.readyState==4)
+        if(xhr.status>=200 &&xhr.status<300){
+          console.log(JSON.parse(xhr.responseText));
+        }
+    };
+    xhr.send(null);
+  }
+}
 //---Object.is---   
 //由于 == 会进行 类型转换，它会尝试将这两个值转换为相同的类型，然后进行比较。 有时会导致一些 意外的行为  这种隐式类型转换可能是你不希望发生的
 //使用 == 可以更好地处理不同的浏览器实现，尤其是在处理 postMessage 相关的消息时。不同的浏览器可能会有一些类型转换的差异，== 的宽松比较能够容忍这些差
