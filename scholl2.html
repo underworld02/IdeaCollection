@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Variable Height Virtual List - Measure After Render</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: sans-serif;
+      padding: 20px;
+    }
+    /* 可滚动容器 */
+    #list-container {
+      width: 300px;
+      height: 400px;  /* 可视区域高度，可根据需要修改 */
+      border: 1px solid #ccc;
+      overflow-y: auto;
+      position: relative;
+    }
+    /* 条目样式 */
+    .item {
+        font-size: 10px;
+      position: absolute;
+      width: 100%;
+      padding: 8px 10px;
+      border-bottom: 1px solid #ddd;
+      background-color: #fafafa;
+      box-sizing: border-box;
+    }
+    /* 用于撑开滚动条的占位元素 */
+    .spacer {
+      position: relative;
+      width: 100%;
+    }
+  </style>
+</head>
+<body>
+
+<h2>渲染后立即测量并更新 - 原生JS示例</h2>
+<div id="list-container"></div>
+
+<script>
+  // ---------------------------
+  // 1. 生成模拟数据：随机内容, 制造不同高度
+  // ---------------------------
+  const TOTAL_COUNT = 50;
+  const data = Array.from({ length: TOTAL_COUNT }, (_, i) => {
+    const text = 'Message ' + i + ': ' + generateRandomWords(5 + Math.floor(Math.random() * 20));
+    return text;
+  });
+
+  function generateRandomWords(wordCount) {
+    const words = [];
+    const chars = "abcdefghijklmnopqrstuvwxyz";
+    for(let i = 0; i < wordCount; i++){
+      let len = 3 + Math.floor(Math.random() * 5);
+      let w = '';
+      for(let c = 0; c < len; c++){
+        w += chars[Math.floor(Math.random() * chars.length)];
+      }
+      words.push(w);
+    }
+    return words.join(' ');
+  }
+
+  // ---------------------------
+  // 2. 建立核心数据结构：itemHeights 和 itemPositions
+  // ---------------------------
+  // 默认先假设每条 50px，高度后面会根据实际测量更新
+  let itemHeights = Array(TOTAL_COUNT).fill(50);
+
+  // itemPositions[i] 表示第 i 条在整个列表中的 “top偏移量”
+  let itemPositions = Array(TOTAL_COUNT).fill(0);
+
+  // 初次计算前缀和
+  computePositions();
+
+  function computePositions() {
+    itemPositions[0] = 0;
+    for(let i = 1; i < TOTAL_COUNT; i++){
+      itemPositions[i] = itemPositions[i - 1] + itemHeights[i - 1];
+    }
+  }
+
+  // ---------------------------
+  // 3. 初始化DOM：container + spacer
+  // ---------------------------
+  const container = document.getElementById('list-container');
+
+  // 用于撑开滚动条高度
+  const spacer = document.createElement('div');
+  spacer.className = 'spacer';
+  spacer.style.height = getTotalHeight() + 'px'; 
+  container.appendChild(spacer);
+
+  // 记录当前渲染的DOM，方便后续移除
+  let renderedItems = [];
+
+  // ---------------------------
+  // 4. 渲染函数
+  // ---------------------------
+  function render() {
+    const scrollTop = container.scrollTop;
+    const viewHeight = container.clientHeight;
+    const viewBottom = scrollTop + viewHeight;
+
+    // 4.1 找可视区的起始索引
+    let startIndex = 0;
+    for(let i = 0; i < TOTAL_COUNT; i++){
+      if(itemPositions[i] + itemHeights[i] >= scrollTop){
+        startIndex = i;
+        break;
+      }
+    }
+
+    // 4.2 找可视区的结束索引
+    let endIndex = startIndex;
+    for(let i = startIndex; i < TOTAL_COUNT; i++){
+      if(itemPositions[i] > viewBottom) {
+        break;
+      }
+      endIndex = i;
+    }
+
+    // 4.3 移除上一次渲染的DOM
+    renderedItems.forEach(el => {
+      if (el.parentNode) {
+        el.parentNode.removeChild(el);
+      }
+    });
+    renderedItems = [];
+
+    // 4.4 渲染 startIndex ~ endIndex 的元素
+    for(let i = startIndex; i <= endIndex; i++){
+      const itemEl = document.createElement('div');
+      itemEl.className = 'item';
+      itemEl.textContent = data[i];
+      // 根据前缀和得到它的绝对定位top
+      itemEl.style.top = itemPositions[i] + 'px';
+
+      container.appendChild(itemEl);
+      renderedItems.push(itemEl);
+
+      // (A) ==== 渲染后立即测量 ====
+      const realHeight = itemEl.offsetHeight;
+      // 如果测量值与我们之前假设的高度不一致
+      if(realHeight !== itemHeights[i]) {
+        // 更新缓存
+        itemHeights[i] = realHeight;
+        // 重新计算位置
+        computePositions();
+        // 更新 spacer 高度
+        spacer.style.height = getTotalHeight() + 'px';
+        // (B) ==== 重新渲染 ====
+        // 因为一旦高度改变，后续元素的 top 都要重算，否则会重叠或错位
+        // 这里直接再次调用 render()，并 return 终止当前流程
+        render();
+        return;
+      }
+    }
+  }
+
+  function getTotalHeight(){
+    // 最后一条起点 + 最后一条高度
+    return itemPositions[TOTAL_COUNT - 1] + itemHeights[TOTAL_COUNT - 1];
+  }
+
+  // ---------------------------
+  // 5. 监听滚动、初始化
+  // ---------------------------
+  container.addEventListener('scroll', render);
+  render(); // 首次渲染
+
+</script>
+</body>
+</html>

@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Fixed Height Virtual Scroll (Vanilla JS)</title>
+  <style>
+    /* 简单重置一下默认样式，非必须 */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: sans-serif;
+      padding: 20px;
+    }
+
+    /* 容器样式 */
+    #list-container {
+      width: 300px;
+      height: 300px;            /* 可视区域高度 */
+      border: 1px solid #ccc;
+      overflow-y: auto;
+      position: relative;       /* 绝对定位子元素需要父容器 position: relative */
+    }
+    /* 用于放所有实际渲染的item */
+    .item {
+      position: absolute;       /* 绝对定位 */
+      height: 50px;            /* 固定高度 */
+      line-height: 50px;       /* 让文字垂直居中 */
+      border-bottom: 1px solid #ddd;
+      padding: 0 10px;
+      width: 100%;
+    }
+    /* 用于撑开滚动条的占位元素 */
+    .spacer {
+      position: relative;
+      width: 100%;
+    }
+  </style>
+</head>
+<body>
+
+<h2>固定高度虚拟滚动 - 原生JS示例</h2>
+<div id="list-container"></div>
+
+<script>
+  // ---------------------------
+  // 1. 定义常量及数据
+  // ---------------------------
+  const ITEM_HEIGHT = 50;                 // 每条的固定高度 (px)
+  const CONTAINER_HEIGHT = 300;           // 容器可视高度 (px)
+  const BUFFER_SIZE = 2;                  // 为了在上下滚动时避免闪现，可加一点缓冲渲染
+  const TOTAL_COUNT = 1000;               // 模拟总条目数
+
+  // 构造一份示例数据（可自行替换为真实接口返回）
+  const data = Array.from({ length: TOTAL_COUNT }, (_, i) => `Item ${i}`);
+
+  // ---------------------------
+  // 2. 初始化DOM结构
+  // ---------------------------
+  const container = document.getElementById('list-container');
+
+  // 创建一个占位元素，用于撑开滚动区域
+  const spacer = document.createElement('div');
+  spacer.className = 'spacer';
+  // 高度 = 总条数 * 单条高度
+  spacer.style.height = `${TOTAL_COUNT * ITEM_HEIGHT}px`;
+  container.appendChild(spacer);
+
+  // ---------------------------
+  // 3. 渲染可视区域内的Item
+  // ---------------------------
+  // 保存当前正在渲染的DOM元素，方便清理或复用
+  let renderedItems = [];
+
+  function render() {
+    // 计算当前的滚动距离
+    const scrollTop = container.scrollTop;
+
+    // 根据滚动距离和固定高度，计算可视区起始索引
+    const startIndex = Math.floor(scrollTop / ITEM_HEIGHT);
+
+    // 一次性可以看到多少条
+    const visibleCount = Math.ceil(CONTAINER_HEIGHT / ITEM_HEIGHT) + BUFFER_SIZE;
+
+    // 计算一下结束索引，注意别越界
+    const endIndex = Math.min(startIndex + visibleCount, TOTAL_COUNT);
+
+    // 移除之前渲染的DOM（或者你也可以做 diff，只更新差异）
+    renderedItems.forEach(itemEl => {
+      if (itemEl.parentNode) {
+        itemEl.parentNode.removeChild(itemEl);
+      }
+    });
+    renderedItems = [];
+
+    // 循环渲染可视区的item
+    for (let i = startIndex; i < endIndex; i++) {
+      const text = data[i];
+      // 创建一个div元素
+      const itemEl = document.createElement('div');
+      itemEl.className = 'item';
+      itemEl.textContent = text;
+      // 计算它在父容器中的位置
+      // top = item索引 * ITEM_HEIGHT
+      itemEl.style.top = `${i * ITEM_HEIGHT}px`;
+
+      container.appendChild(itemEl);
+      renderedItems.push(itemEl);
+    }
+  }
+
+  // ---------------------------
+  // 4. 事件监听
+  // ---------------------------
+  // 在容器滚动时重新渲染
+  container.addEventListener('scroll', () => {
+    render();
+  });
+
+  // 初次渲染
+  render();
+</script>
+
+</body>
+</html>
