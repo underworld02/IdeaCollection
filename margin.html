@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Margin Values Example</title>
+    <style>
+      .box {
+        width: 200px;
+        height: 100px;
+        background-color: #f0f0f0;
+        border: 2px solid #333;
+        margin-bottom: 10px; /* 设置每个.box的下边距离为10px */
+      }
+ 
+      .length-value {
+        margin-left: 20px; /* 使用长度值20px */
+      }
+ 
+      .negative-value {
+        margin-left: -20px; /* 使用负值-20px */
+      }
+ 
+      .auto-value {
+        width: 1080px; /* 设置宽度为1080px */
+        height: 522px; /* 设置高度为522px */
+        margin-top: 10px;
+        margin-right: auto; /* 左右使用auto值，可以使元素水平居中 */
+        margin-left: auto; /* 使用auto值 */
+      }
+ 
+      .parent {
+        margin-left: 20px; /* 设置父元素的左外边距为 20px */
+        background-color: #f0f0f0;
+      }
+ 
+      .child {
+        width: 200px;
+        height: 100px;
+        background-color: #ffcc00;
+        margin-left: inherit; /* 继承父元素的左外边距 */
+      }
+      .container {
+        height: 50px;
+        overflow: hidden;
+        background-color: #f0f0f0;
+      }
+
+      .left {
+        float: left;
+        width: 200px;
+        margin-left: -100%;
+        background-color: #ffcc20;
+      }
+
+      .right {
+        float: left;
+        background-color: #ff2c00;
+      }
+      #div1 {
+        width: 50%; /* 或任意你需要的宽度 */
+        height: 200px; 
+        background-color: #6693FF;
+        margin: auto;
+        position: absolute;
+        left: 0;
+        top: 0;
+        right: 0;
+        bottom: 0;
+    }
+    .container {
+        width: 100%;
+        height: 100vh; /* 或者使用 height: 100% */
+        }
+
+        .top, .middle, .bottom {
+        width: 50%;
+        height: 50vh; /* 或者使用 height: 50% */
+        float: left; /* 或者使用 display: inline-block; */
+        }
+
+        .top {
+        background-color: red; /* 设置上方区域的背景色 */
+        }
+
+        .middle {
+        background-color: white; /* 设置中间区域的背景色 */
+        }
+
+        .bottom {
+        background-color: blue; /* 设置下方区域的背景色 */
+        }
+    </style>
+  </head>
+  <body>
+    <div class="box length-value">Margin with Length Value (20px)</div>
+    <div class="box negative-value">Margin with Negative Value (-10px)</div>
+    <div class="box auto-value"><img src="./img/tree.png" alt="" /></div>
+    <div class="parent">
+      <div class="child">我与父级也有距离</div>
+    </div>
+    <div class="container">
+        <div class="left">我rr</div>
+        <div class="right">我与父级也有距离</div>
+      </div>
+      <div id="div1">距离</div>
+
+      <div class="container2">
+        <div class="top"></div>
+        <div class="middle"></div>
+        <div class="bottom"></div>
+      </div>
+       
+  </body>
+</html>
