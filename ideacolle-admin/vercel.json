@@ -6,7 +6,7 @@
     },
     {
       "source": "/api/",
-      "destination": "https://api.antdv-pro.com/"
+      "destination": "https://api.antdv-pro.cn/"
     },
     {
       "source": "/api/:match*",
