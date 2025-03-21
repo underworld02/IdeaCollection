@@ -1,5 +1,11 @@
-{
+[{
 id:'1002',
 name:'b',
 api:'/user/photo'
-}
+},
+{
+    id:'1001',
+    name:'a',
+    api:'/user/text',
+    t1:'t1',
+}]
